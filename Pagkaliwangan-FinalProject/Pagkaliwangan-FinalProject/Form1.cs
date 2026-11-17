@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Diagnostics.Eventing.Reader;
+using System.Security.Cryptography;
 using System.Xml.Linq;
 
 namespace Pagkaliwangan_FinalProject
@@ -5,6 +8,10 @@ namespace Pagkaliwangan_FinalProject
     public partial class Form1 : Form
     {
         private readonly String XMLFilePath = Path.Combine(Application.StartupPath, "word_guess.xml");
+
+        public ArrayList randomWordsList = new ArrayList();
+        public ArrayList randomWordsUsed = new ArrayList();
+        public Random rand = new Random();
 
         public Form1()
         {
@@ -14,6 +21,7 @@ namespace Pagkaliwangan_FinalProject
         private void Form1_Load(object sender, EventArgs e)
         {
             CheckIfXMLExists();
+            GenerateRandomWords();
         }
 
         private void CheckIfXMLExists()
@@ -27,6 +35,37 @@ namespace Pagkaliwangan_FinalProject
                     new XElement("Games")
                 );
                 newDoc.Save(XMLFilePath);
+            }
+        }
+
+        // Set up randomWordsList with 30 words.
+        private void GenerateRandomWords()
+        {
+            randomWordsList.Add("CYCLE");
+
+        }
+
+        private String SelectWordToGuess()
+        {
+            if (randomWordsList.Count > 0)
+            {
+                int chosenIndex = rand.Next(randomWordsList.Count);
+
+                string wordToGuess = (string) randomWordsList[chosenIndex];
+
+                randomWordsUsed.Add(wordToGuess);
+                randomWordsList.RemoveAt(chosenIndex);
+
+                return wordToGuess;
+            }
+            else
+            {
+                if (randomWordsList.Count == 0)
+                {
+                    // Reset randomWordsList
+                    GenerateRandomWords();
+                }
+                return SelectWordToGuess();
             }
         }
 
