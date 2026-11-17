@@ -32,6 +32,7 @@
             btnQuitApp = new Button();
             tabApp = new TabControl();
             tabPgBMICalculator = new TabPage();
+            lblDisclaimer = new Label();
             lblHeightHintBMI = new Label();
             btnCalculate = new Button();
             lblBMICategory = new Label();
@@ -63,7 +64,7 @@
             nudWeightConverter = new NumericUpDown();
             lblAppInfo = new Label();
             lblAppHeading = new Label();
-            lblDisclaimer = new Label();
+            lblConverterNote = new Label();
             tabApp.SuspendLayout();
             tabPgBMICalculator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudWeightBMI).BeginInit();
@@ -120,6 +121,16 @@
             tabPgBMICalculator.Text = "BMI Calculator";
             tabPgBMICalculator.UseVisualStyleBackColor = true;
             // 
+            // lblDisclaimer
+            // 
+            lblDisclaimer.AutoSize = true;
+            lblDisclaimer.Font = new Font("Segoe UI", 10F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblDisclaimer.Location = new Point(32, 561);
+            lblDisclaimer.Name = "lblDisclaimer";
+            lblDisclaimer.Size = new Size(929, 84);
+            lblDisclaimer.TabIndex = 14;
+            lblDisclaimer.Text = resources.GetString("lblDisclaimer.Text");
+            // 
             // lblHeightHintBMI
             // 
             lblHeightHintBMI.AutoSize = true;
@@ -133,7 +144,7 @@
             // btnCalculate
             // 
             btnCalculate.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnCalculate.Location = new Point(981, 600);
+            btnCalculate.Location = new Point(951, 454);
             btnCalculate.Name = "btnCalculate";
             btnCalculate.Size = new Size(112, 45);
             btnCalculate.TabIndex = 12;
@@ -145,7 +156,7 @@
             // 
             lblBMICategory.AutoSize = true;
             lblBMICategory.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblBMICategory.Location = new Point(412, 449);
+            lblBMICategory.Location = new Point(84, 462);
             lblBMICategory.Name = "lblBMICategory";
             lblBMICategory.Size = new Size(177, 28);
             lblBMICategory.TabIndex = 11;
@@ -154,7 +165,7 @@
             // lblBMICategoryCaption
             // 
             lblBMICategoryCaption.AutoSize = true;
-            lblBMICategoryCaption.Location = new Point(360, 406);
+            lblBMICategoryCaption.Location = new Point(32, 419);
             lblBMICategoryCaption.Name = "lblBMICategoryCaption";
             lblBMICategoryCaption.Size = new Size(178, 32);
             lblBMICategoryCaption.TabIndex = 10;
@@ -164,7 +175,7 @@
             // 
             lblBMIValue.AutoSize = true;
             lblBMIValue.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblBMIValue.Location = new Point(412, 367);
+            lblBMIValue.Location = new Point(84, 380);
             lblBMIValue.Name = "lblBMIValue";
             lblBMIValue.Size = new Size(177, 28);
             lblBMIValue.TabIndex = 9;
@@ -173,7 +184,7 @@
             // lblBMIValueCaption
             // 
             lblBMIValueCaption.AutoSize = true;
-            lblBMIValueCaption.Location = new Point(360, 325);
+            lblBMIValueCaption.Location = new Point(32, 338);
             lblBMIValueCaption.Name = "lblBMIValueCaption";
             lblBMIValueCaption.Size = new Size(193, 32);
             lblBMIValueCaption.TabIndex = 8;
@@ -192,18 +203,20 @@
             // cboHeightUnitBMI
             // 
             cboHeightUnitBMI.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboHeightUnitBMI.Font = new Font("Segoe UI", 11F);
             cboHeightUnitBMI.FormattingEnabled = true;
             cboHeightUnitBMI.Items.AddRange(new object[] { "Centimeters (cm)", "Inches (in)", "Feet & Inches (ft ' in\")" });
             cboHeightUnitBMI.Location = new Point(847, 158);
             cboHeightUnitBMI.Name = "cboHeightUnitBMI";
-            cboHeightUnitBMI.Size = new Size(216, 40);
+            cboHeightUnitBMI.Size = new Size(216, 38);
             cboHeightUnitBMI.TabIndex = 6;
             // 
             // txtHeightBMI
             // 
+            txtHeightBMI.Font = new Font("Segoe UI", 11F);
             txtHeightBMI.Location = new Point(678, 160);
             txtHeightBMI.Name = "txtHeightBMI";
-            txtHeightBMI.Size = new Size(150, 39);
+            txtHeightBMI.Size = new Size(150, 37);
             txtHeightBMI.TabIndex = 5;
             txtHeightBMI.TextAlign = HorizontalAlignment.Right;
             // 
@@ -229,11 +242,12 @@
             // cboWeightUnitBMI
             // 
             cboWeightUnitBMI.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboWeightUnitBMI.Font = new Font("Segoe UI", 11F);
             cboWeightUnitBMI.FormattingEnabled = true;
             cboWeightUnitBMI.Items.AddRange(new object[] { "kg", "lbs" });
             cboWeightUnitBMI.Location = new Point(217, 159);
             cboWeightUnitBMI.Name = "cboWeightUnitBMI";
-            cboWeightUnitBMI.Size = new Size(78, 40);
+            cboWeightUnitBMI.Size = new Size(78, 38);
             cboWeightUnitBMI.TabIndex = 2;
             // 
             // lblWeightBMI
@@ -247,15 +261,17 @@
             // 
             // nudWeightBMI
             // 
+            nudWeightBMI.Font = new Font("Segoe UI", 11F);
             nudWeightBMI.Location = new Point(67, 160);
             nudWeightBMI.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
             nudWeightBMI.Name = "nudWeightBMI";
-            nudWeightBMI.Size = new Size(131, 39);
+            nudWeightBMI.Size = new Size(131, 37);
             nudWeightBMI.TabIndex = 0;
             nudWeightBMI.TextAlign = HorizontalAlignment.Right;
             // 
             // tabPgUnitConverter
             // 
+            tabPgUnitConverter.Controls.Add(lblConverterNote);
             tabPgUnitConverter.Controls.Add(lblHeightHintConverter);
             tabPgUnitConverter.Controls.Add(btnConvert);
             tabPgUnitConverter.Controls.Add(lblConvertedHeightValue);
@@ -292,7 +308,7 @@
             // btnConvert
             // 
             btnConvert.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnConvert.Location = new Point(490, 554);
+            btnConvert.Location = new Point(488, 537);
             btnConvert.Name = "btnConvert";
             btnConvert.Size = new Size(112, 45);
             btnConvert.TabIndex = 20;
@@ -351,18 +367,20 @@
             // cboHeightUnitConverter
             // 
             cboHeightUnitConverter.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboHeightUnitConverter.Font = new Font("Segoe UI", 11F);
             cboHeightUnitConverter.FormattingEnabled = true;
             cboHeightUnitConverter.Items.AddRange(new object[] { "Centimeters (cm)", "Inches (in)", "Feet & Inches (ft ' in\")" });
             cboHeightUnitConverter.Location = new Point(856, 149);
             cboHeightUnitConverter.Name = "cboHeightUnitConverter";
-            cboHeightUnitConverter.Size = new Size(219, 40);
+            cboHeightUnitConverter.Size = new Size(219, 38);
             cboHeightUnitConverter.TabIndex = 14;
             // 
             // txtHeightConverter
             // 
+            txtHeightConverter.Font = new Font("Segoe UI", 11F);
             txtHeightConverter.Location = new Point(690, 149);
             txtHeightConverter.Name = "txtHeightConverter";
-            txtHeightConverter.Size = new Size(150, 39);
+            txtHeightConverter.Size = new Size(150, 37);
             txtHeightConverter.TabIndex = 13;
             txtHeightConverter.TextAlign = HorizontalAlignment.Right;
             // 
@@ -371,9 +389,9 @@
             lblHeightConverter.AutoSize = true;
             lblHeightConverter.Location = new Point(662, 82);
             lblHeightConverter.Name = "lblHeightConverter";
-            lblHeightConverter.Size = new Size(222, 32);
+            lblHeightConverter.Size = new Size(162, 32);
             lblHeightConverter.TabIndex = 12;
-            lblHeightConverter.Text = "Input your height:";
+            lblHeightConverter.Text = "Input height:";
             // 
             // lblWeightGuideConverter
             // 
@@ -388,11 +406,12 @@
             // cboWeightUnitConverter
             // 
             cboWeightUnitConverter.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboWeightUnitConverter.Font = new Font("Segoe UI", 11F);
             cboWeightUnitConverter.FormattingEnabled = true;
-            cboWeightUnitConverter.Items.AddRange(new object[] { "Kilograms (Kg)", "Pounds (lbs)" });
+            cboWeightUnitConverter.Items.AddRange(new object[] { "kg", "lbs" });
             cboWeightUnitConverter.Location = new Point(229, 150);
             cboWeightUnitConverter.Name = "cboWeightUnitConverter";
-            cboWeightUnitConverter.Size = new Size(78, 40);
+            cboWeightUnitConverter.Size = new Size(78, 38);
             cboWeightUnitConverter.TabIndex = 10;
             // 
             // lblWeightConverter
@@ -400,16 +419,17 @@
             lblWeightConverter.AutoSize = true;
             lblWeightConverter.Location = new Point(44, 82);
             lblWeightConverter.Name = "lblWeightConverter";
-            lblWeightConverter.Size = new Size(227, 32);
+            lblWeightConverter.Size = new Size(167, 32);
             lblWeightConverter.TabIndex = 9;
-            lblWeightConverter.Text = "Input your weight:";
+            lblWeightConverter.Text = "Input weight:";
             // 
             // nudWeightConverter
             // 
+            nudWeightConverter.Font = new Font("Segoe UI", 11F);
             nudWeightConverter.Location = new Point(79, 151);
             nudWeightConverter.Maximum = new decimal(new int[] { 1000, 0, 0, 0 });
             nudWeightConverter.Name = "nudWeightConverter";
-            nudWeightConverter.Size = new Size(131, 39);
+            nudWeightConverter.Size = new Size(131, 37);
             nudWeightConverter.TabIndex = 8;
             nudWeightConverter.TextAlign = HorizontalAlignment.Right;
             // 
@@ -433,15 +453,15 @@
             lblAppHeading.TabIndex = 3;
             lblAppHeading.Text = "PAGKALIWANGAN - ISCS 30.50 Final Project";
             // 
-            // lblDisclaimer
+            // lblConverterNote
             // 
-            lblDisclaimer.AutoSize = true;
-            lblDisclaimer.Font = new Font("Segoe UI", 10F, FontStyle.Italic, GraphicsUnit.Point, 0);
-            lblDisclaimer.Location = new Point(32, 561);
-            lblDisclaimer.Name = "lblDisclaimer";
-            lblDisclaimer.Size = new Size(929, 84);
-            lblDisclaimer.TabIndex = 14;
-            lblDisclaimer.Text = resources.GetString("lblDisclaimer.Text");
+            lblConverterNote.AutoSize = true;
+            lblConverterNote.Font = new Font("Segoe UI", 10F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblConverterNote.Location = new Point(30, 618);
+            lblConverterNote.Name = "lblConverterNote";
+            lblConverterNote.Size = new Size(977, 28);
+            lblConverterNote.TabIndex = 22;
+            lblConverterNote.Text = "NOTE: If you wish to just convert one (i.e., weight or height only), input 0 on the one you do not wish to convert.";
             // 
             // Form1
             // 
@@ -504,5 +524,6 @@
         private Label lblHeightHintBMI;
         private Label lblHeightHintConverter;
         private Label lblDisclaimer;
+        private Label lblConverterNote;
     }
 }

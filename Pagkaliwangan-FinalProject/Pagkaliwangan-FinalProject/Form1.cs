@@ -101,7 +101,7 @@ namespace Pagkaliwangan_FinalProject
                 heightToUse = heightInput;
             }
             // If height unit is Feet and Inches
-            else if(selectedHeightUnit == 2)
+            else if (selectedHeightUnit == 2)
             {
                 string heightInputString = txtHeightBMI.Text.Trim();
 
@@ -168,9 +168,9 @@ namespace Pagkaliwangan_FinalProject
             }
 
             // BMI Calculation
-            BMI = ((weightToUse)/(Math.Pow(heightToUse, 2)));
+            BMI = ((weightToUse) / (Math.Pow(heightToUse, 2)));
 
-            lblBMIValue.Text = $"Given the values you have inputted. Your calculated BMI is: {BMI:F2}";
+            lblBMIValue.Text = $"Given the values you have inputted, your calculated BMI is: {BMI:F2}.";
 
             // BMI categorization
             // Underweight
@@ -194,7 +194,7 @@ namespace Pagkaliwangan_FinalProject
             // Obese
             else if (30 <= BMI)
             {
-                lblBMICategory.Text = $"With a BMI of {BMI:F2}, you are considered obese";
+                lblBMICategory.Text = $"With a BMI of {BMI:F2}, you are considered obese.";
                 BMICategory = "Obese";
             }
             // Default or Invalid
@@ -202,8 +202,8 @@ namespace Pagkaliwangan_FinalProject
             {
                 lblBMICategory.Text = $"Invalid BMI, or you do not fit the categories/cutoffs by WHO.";
                 return;
-            }            
-            
+            }
+
             // Write Calculation to calculations.xml
             CheckIfXMLExists();
             XDocument doc = XDocument.Load(XMLFilePath);
@@ -215,7 +215,7 @@ namespace Pagkaliwangan_FinalProject
                 int maxID = 0;
                 foreach (XElement element in existingCalculations)
                 {
-                    int currentID = (int) element.Attribute("Id");
+                    int currentID = (int)element.Attribute("Id");
                     if (currentID > maxID)
                     {
                         maxID = currentID;
@@ -231,20 +231,114 @@ namespace Pagkaliwangan_FinalProject
             );
 
             //Add Element inside Calculation node.
-            calculationElement.Add( new XElement("BMI_Category", BMICategory,
-                new XElement("BMI", BMI, 
+            calculationElement.Add(new XElement("BMI_Category", BMICategory,
+                new XElement("BMI", BMI,
                     new XElement("Height", heightElement),
                     new XElement("Weight", weightElement)
                 )));
 
-            doc.Root.Add( calculationElement );
+            doc.Root.Add(calculationElement);
             doc.Save(XMLFilePath);
 
         }
 
         private void btnConvert_Click(object sender, EventArgs e)
         {
+            double weightInput = (double) nudWeightConverter.Value;
+            int selectedWeightUnit = cboWeightUnitConverter.SelectedIndex;
 
+            int selectedHeightUnit = cboHeightUnitConverter.SelectedIndex;
+
+            double heightToUse;
+            double weightToUse;
+
+            // Handle Height first.
+            // If height unit is cm or inches
+            if (selectedHeightUnit == 0 || selectedHeightUnit == 1)
+            {
+                if (!double.TryParse(txtHeightConverter.Text.Trim(), out double heightInput))
+                {
+                    MessageBox.Show("Please enter a valid numeric value.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtHeightConverter.Focus();
+                    return;
+                }
+
+                heightToUse = heightInput;
+            }
+            // If height unit is Feet and Inches
+            else if (selectedHeightUnit == 2)
+            {
+                string heightInputString = txtHeightConverter.Text.Trim();
+
+                //Find all numbers in the string (including decimals)
+                MatchCollection numbers = Regex.Matches(heightInputString, @"\d+(\.\d+)?");
+
+                if (numbers.Count == 0)
+                {
+                    MessageBox.Show("Please enter a valid numeric value.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtHeightConverter.Focus();
+                    return;
+                }
+
+                double feet = double.Parse(numbers[0].Value);
+                // Set default value for inches
+                double inches = 0;
+
+                // If there is a 2nd number in the given Numbers[], the 2nd element is the inches.
+                if (numbers.Count > 1)
+                {
+                    inches = double.Parse(numbers[1].Value);
+                }
+
+                double totalInches = (feet * 12) + inches;
+
+                heightToUse = totalInches;
+            }
+            else
+            {
+                MessageBox.Show("Please select a unit that is from the dropdown.", "Height Unit Index Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cboHeightUnitBMI.Focus();
+                return;
+            }
+
+            // Convert height from imperial to centimeters
+            if (selectedHeightUnit == 1 || selectedHeightUnit == 2)
+            {
+                heightToUse = heightToUse * 2.54;
+                lblConvertedHeightValue.Text = $"{heightToUse:F2} centimeters (cm); \n{(heightToUse/100):F2} meters (m)";
+            }
+            // Convert cm to imperial
+            else if (selectedHeightUnit == 0)
+            {
+                double totalInchConvert = (heightToUse) / (2.54);
+
+                int finalFeet = (int) Math.Floor(totalInchConvert/12);
+                double finalInches = totalInchConvert % 12;
+                lblConvertedHeightValue.Text = $"{finalFeet} feet (ft), {finalInches:F2} inches (in); \n{totalInchConvert:F2} inches (in)";
+            }
+
+            // Weight Handling
+            // If unit is kg
+            if (selectedWeightUnit == 0)
+            {
+                weightToUse = weightInput;
+                double finalPound = (weightToUse * 2.2);
+                lblConvertedWeightValue.Text = $"{finalPound:F2} pounds (lbs).";
+            }
+            // If unit is lbs
+            else if (selectedWeightUnit == 1)
+            {
+                //Already Converted, pass to finalKilo
+                weightToUse = weightInput * 0.45359237;
+                double finalKilo = weightToUse;
+                lblConvertedWeightValue.Text = $"{finalKilo:F2} kilograms (kg).";
+            }
+            else
+            {
+                MessageBox.Show("Please select a unit that is from the dropdown.", "Weight Unit Index Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cboWeightUnitConverter.Focus();
+                return;
+            }
         }
     }
 }
