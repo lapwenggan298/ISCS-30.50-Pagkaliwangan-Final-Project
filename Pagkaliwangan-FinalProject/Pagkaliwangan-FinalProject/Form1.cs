@@ -170,7 +170,7 @@ namespace Pagkaliwangan_FinalProject
             // BMI Calculation
             BMI = ((weightToUse)/(Math.Pow(heightToUse, 2)));
 
-            lblBMIValue.Text = $"Given the values you have inputted. Your calculated BMI is: {BMI}";
+            lblBMIValue.Text = $"Given the values you have inputted. Your calculated BMI is: {BMI:F2}";
 
             // BMI categorization
             // Underweight
