@@ -30,7 +30,7 @@ namespace Pagkaliwangan_FinalProject
             {
                 XDocument newDoc = new XDocument(
                     new XDeclaration("1.0", "utf-8", "yes"),
-                    //Games as Root node
+                    // Games as Root node
                     //https://learn.microsoft.com/en-us/dotnet/api/system.xml.linq.xdocument?view=net-10.0
                     new XElement("Games")
                 );
@@ -41,8 +41,39 @@ namespace Pagkaliwangan_FinalProject
         // Set up randomWordsList with 30 words.
         private void GenerateRandomWords()
         {
+            //0-9
             randomWordsList.Add("CYCLE");
-
+            randomWordsList.Add("BOTOX");
+            randomWordsList.Add("CREAM");
+            randomWordsList.Add("FIGHT");
+            randomWordsList.Add("DONUT");
+            randomWordsList.Add("POUND");
+            randomWordsList.Add("MOTOR");
+            randomWordsList.Add("TROUT");
+            randomWordsList.Add("ALPHA");
+            randomWordsList.Add("OREOS");
+            //10-19
+            randomWordsList.Add("FUNNY");
+            randomWordsList.Add("TRUNK");
+            randomWordsList.Add("CLOWN");
+            randomWordsList.Add("APPLE");
+            randomWordsList.Add("LINIS");
+            randomWordsList.Add("TOOTH");
+            randomWordsList.Add("DILAG");
+            randomWordsList.Add("PIECE");
+            randomWordsList.Add("PEACE");
+            randomWordsList.Add("BANAL");
+            //20-29
+            randomWordsList.Add("UMAGA");
+            randomWordsList.Add("SIGLO");
+            randomWordsList.Add("TRAIN");
+            randomWordsList.Add("JEEPS");
+            randomWordsList.Add("STARS");
+            randomWordsList.Add("BUWAN");
+            randomWordsList.Add("SIKLO");
+            randomWordsList.Add("USWAG");
+            randomWordsList.Add("SAPAT");
+            randomWordsList.Add("GAMOT");
         }
 
         private String SelectWordToGuess()
@@ -60,11 +91,9 @@ namespace Pagkaliwangan_FinalProject
             }
             else
             {
-                if (randomWordsList.Count == 0)
-                {
-                    // Reset randomWordsList
-                    GenerateRandomWords();
-                }
+                // Reset/Regenerate randomWordsList
+                GenerateRandomWords();
+                
                 return SelectWordToGuess();
             }
         }
