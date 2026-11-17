@@ -152,8 +152,34 @@ namespace Pagkaliwangan_FinalProject
             // BMI Calculation
             BMI = ((weightToUse)/(Math.Pow(heightToUse, 2)));
 
-            lblBMIValue.Text = $"Your calculated BMI is: {BMI}";
+            lblBMIValue.Text = $"Given the values you have inputted. Your calculated BMI is: {BMI}";
 
+            // BMI categorization
+            // Underweight
+            if (BMI < 18.5)
+            {
+                lblBMICategory.Text = $"With a BMI of {BMI: F2}, you are considered underweight.";
+            }
+            // Healthy weight
+            else if (18.5 <= BMI && BMI < 25)
+            {
+                lblBMICategory.Text = $"With a BMI of {BMI: F2}, you are considered to have a healthy weight.";
+            }
+            // Overweight
+            else if (25 <= BMI && BMI < 30)
+            {
+                lblBMICategory.Text = $"With a BMI of {BMI: F2}, you are considered overweight.";
+            }
+            // Obese
+            else if (30 <= BMI)
+            {
+                lblBMICategory.Text = $"With a BMI of {BMI: F2}, you are considered obese";
+            }
+            // Default or Invalid
+            else
+            {
+                lblBMICategory.Text = $"Invalid BMI, or you do not fit the categories/cutoffs by WHO.";
+            }
         }
 
         private void btnConvert_Click(object sender, EventArgs e)
