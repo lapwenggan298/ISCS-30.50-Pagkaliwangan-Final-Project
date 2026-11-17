@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             btnQuitApp = new Button();
             tabApp = new TabControl();
             tabPgBMICalculator = new TabPage();
@@ -62,6 +63,7 @@
             nudWeightConverter = new NumericUpDown();
             lblAppInfo = new Label();
             lblAppHeading = new Label();
+            lblDisclaimer = new Label();
             tabApp.SuspendLayout();
             tabPgBMICalculator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudWeightBMI).BeginInit();
@@ -94,6 +96,7 @@
             // 
             // tabPgBMICalculator
             // 
+            tabPgBMICalculator.Controls.Add(lblDisclaimer);
             tabPgBMICalculator.Controls.Add(lblHeightHintBMI);
             tabPgBMICalculator.Controls.Add(btnCalculate);
             tabPgBMICalculator.Controls.Add(lblBMICategory);
@@ -303,7 +306,7 @@
             lblConvertedHeightValue.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblConvertedHeightValue.Location = new Point(771, 292);
             lblConvertedHeightValue.Name = "lblConvertedHeightValue";
-            lblConvertedHeightValue.Size = new Size(130, 28);
+            lblConvertedHeightValue.Size = new Size(134, 28);
             lblConvertedHeightValue.TabIndex = 19;
             lblConvertedHeightValue.Text = "No inputs yet.";
             // 
@@ -313,7 +316,7 @@
             lblConvertedWeightValue.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblConvertedWeightValue.Location = new Point(128, 292);
             lblConvertedWeightValue.Name = "lblConvertedWeightValue";
-            lblConvertedWeightValue.Size = new Size(130, 28);
+            lblConvertedWeightValue.Size = new Size(134, 28);
             lblConvertedWeightValue.TabIndex = 18;
             lblConvertedWeightValue.Text = "No inputs yet.";
             // 
@@ -430,6 +433,16 @@
             lblAppHeading.TabIndex = 3;
             lblAppHeading.Text = "PAGKALIWANGAN - ISCS 30.50 Final Project";
             // 
+            // lblDisclaimer
+            // 
+            lblDisclaimer.AutoSize = true;
+            lblDisclaimer.Font = new Font("Segoe UI", 10F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblDisclaimer.Location = new Point(32, 561);
+            lblDisclaimer.Name = "lblDisclaimer";
+            lblDisclaimer.Size = new Size(929, 84);
+            lblDisclaimer.TabIndex = 14;
+            lblDisclaimer.Text = resources.GetString("lblDisclaimer.Text");
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -490,5 +503,6 @@
         private Button btnConvert;
         private Label lblHeightHintBMI;
         private Label lblHeightHintConverter;
+        private Label lblDisclaimer;
     }
 }

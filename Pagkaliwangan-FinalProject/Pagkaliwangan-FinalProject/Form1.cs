@@ -67,7 +67,11 @@ namespace Pagkaliwangan_FinalProject
             int selectedWeightUnit = cboWeightUnitBMI.SelectedIndex;
 
             int selectedHeightUnit = cboHeightUnitBMI.SelectedIndex;
+
             double heightToUse;
+            double weightToUse;
+
+            double BMI;
 
             // Handle Height first.
             // If height unit is cm or inches
@@ -123,6 +127,33 @@ namespace Pagkaliwangan_FinalProject
             {
                 heightToUse = heightToUse * 2.54;
             }
+
+            // Convert to meters for use in BMI formula.
+            heightToUse = heightToUse * 0.01;
+
+            // Weight Handling
+            // If unit is kg
+            if (selectedWeightUnit == 0)
+            {
+                weightToUse = weightInput;
+            }
+            // If unit is lbs
+            else if (selectedWeightUnit == 1)
+            {
+                weightToUse = weightInput * 0.45359237;
+            }
+            else
+            {
+                MessageBox.Show("Please select a unit that is from the dropdown.", "Weight Unit Index Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cboWeightUnitBMI.Focus();
+                return;
+            }
+
+            // BMI Calculation
+            BMI = ((weightToUse)/(Math.Pow(heightToUse, 2)));
+
+            lblBMIValue.Text = $"Your calculated BMI is: {BMI}";
+
         }
 
         private void btnConvert_Click(object sender, EventArgs e)
