@@ -1,5 +1,6 @@
 using System.Xml.Linq;
 using System.Text.RegularExpressions;
+using System.Security.Policy;
 
 namespace Pagkaliwangan_FinalProject
 {
@@ -66,9 +67,61 @@ namespace Pagkaliwangan_FinalProject
             int selectedWeightUnit = cboWeightUnitBMI.SelectedIndex;
 
             int selectedHeightUnit = cboHeightUnitBMI.SelectedIndex;
-            
-            {
+            double heightToUse;
 
+            // Handle Height first.
+            // If height unit is cm or inches
+            if (selectedHeightUnit == 0 || selectedHeightUnit == 1)
+            {
+                if (!double.TryParse(txtHeightBMI.Text.Trim(), out double heightInput))
+                {
+                    MessageBox.Show("Please enter a valid numeric value.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtHeightBMI.Focus();
+                    return;
+                }
+
+                heightToUse = heightInput;
+            }
+            // If height unit is Feet and Inches
+            else if(selectedHeightUnit == 2)
+            {
+                string heightInputString = txtHeightBMI.Text.Trim();
+
+                //Find all numbers in the string (including decimals)
+                MatchCollection numbers = Regex.Matches(heightInputString, @"\d+(\.\d+)?");
+
+                if (numbers.Count == 0)
+                {
+                    MessageBox.Show("Please enter a valid numeric value.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtHeightBMI.Focus();
+                    return;
+                }
+
+                double feet = double.Parse(numbers[0].Value);
+                // Set default value for inches
+                double inches = 0;
+
+                // If there is a 2nd number in the given Numbers[], the 2nd element is the inches.
+                if (numbers.Count > 1)
+                {
+                    inches = double.Parse(numbers[1].Value);
+                }
+
+                double totalInches = (feet * 12) + inches;
+
+                heightToUse = totalInches;
+            }
+            else
+            {
+                MessageBox.Show("Please select a unit that is from the dropdown.", "Height Unit Index Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cboHeightUnitBMI.Focus();
+                return;
+            }
+
+            // Convert height to centimeters from inches
+            if (selectedHeightUnit == 1 || selectedHeightUnit == 2)
+            {
+                heightToUse = heightToUse * 2.54;
             }
         }
 

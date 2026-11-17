@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
             btnQuitApp = new Button();
             tabApp = new TabControl();
             tabPgBMICalculator = new TabPage();
+            lblHeightHintBMI = new Label();
             btnCalculate = new Button();
             lblBMICategory = new Label();
             lblBMICategoryCaption = new Label();
@@ -46,6 +46,7 @@
             lblWeightBMI = new Label();
             nudWeightBMI = new NumericUpDown();
             tabPgUnitConverter = new TabPage();
+            lblHeightHintConverter = new Label();
             btnConvert = new Button();
             lblConvertedHeightValue = new Label();
             lblConvertedWeightValue = new Label();
@@ -61,7 +62,6 @@
             nudWeightConverter = new NumericUpDown();
             lblAppInfo = new Label();
             lblAppHeading = new Label();
-            toolTip1 = new ToolTip(components);
             tabApp.SuspendLayout();
             tabPgBMICalculator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudWeightBMI).BeginInit();
@@ -94,6 +94,7 @@
             // 
             // tabPgBMICalculator
             // 
+            tabPgBMICalculator.Controls.Add(lblHeightHintBMI);
             tabPgBMICalculator.Controls.Add(btnCalculate);
             tabPgBMICalculator.Controls.Add(lblBMICategory);
             tabPgBMICalculator.Controls.Add(lblBMICategoryCaption);
@@ -115,6 +116,16 @@
             tabPgBMICalculator.TabIndex = 0;
             tabPgBMICalculator.Text = "BMI Calculator";
             tabPgBMICalculator.UseVisualStyleBackColor = true;
+            // 
+            // lblHeightHintBMI
+            // 
+            lblHeightHintBMI.AutoSize = true;
+            lblHeightHintBMI.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblHeightHintBMI.Location = new Point(645, 202);
+            lblHeightHintBMI.Name = "lblHeightHintBMI";
+            lblHeightHintBMI.Size = new Size(446, 50);
+            lblHeightHintBMI.TabIndex = 13;
+            lblHeightHintBMI.Text = "Format for Feet and Inches: 5 8 or 5' 8\"; \r\nFor others (i.e. inches, centimeters), just put the number.";
             // 
             // btnCalculate
             // 
@@ -192,7 +203,6 @@
             txtHeightBMI.Size = new Size(150, 39);
             txtHeightBMI.TabIndex = 5;
             txtHeightBMI.TextAlign = HorizontalAlignment.Right;
-            toolTip1.SetToolTip(txtHeightBMI, "Format for Imperial: 5 8 or 5' 8\"; for Metric: 170");
             // 
             // lblHeightBMI
             // 
@@ -243,6 +253,7 @@
             // 
             // tabPgUnitConverter
             // 
+            tabPgUnitConverter.Controls.Add(lblHeightHintConverter);
             tabPgUnitConverter.Controls.Add(btnConvert);
             tabPgUnitConverter.Controls.Add(lblConvertedHeightValue);
             tabPgUnitConverter.Controls.Add(lblConvertedWeightValue);
@@ -265,6 +276,16 @@
             tabPgUnitConverter.Text = "Unit Converter";
             tabPgUnitConverter.UseVisualStyleBackColor = true;
             // 
+            // lblHeightHintConverter
+            // 
+            lblHeightHintConverter.AutoSize = true;
+            lblHeightHintConverter.Font = new Font("Segoe UI", 9F, FontStyle.Italic, GraphicsUnit.Point, 0);
+            lblHeightHintConverter.Location = new Point(662, 192);
+            lblHeightHintConverter.Name = "lblHeightHintConverter";
+            lblHeightHintConverter.Size = new Size(446, 50);
+            lblHeightHintConverter.TabIndex = 21;
+            lblHeightHintConverter.Text = "Format for Feet and Inches: 5 8 or 5' 8\"; \r\nFor others (i.e. inches, centimeters), just put the number.\r\n";
+            // 
             // btnConvert
             // 
             btnConvert.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -284,7 +305,7 @@
             lblConvertedHeightValue.Name = "lblConvertedHeightValue";
             lblConvertedHeightValue.Size = new Size(130, 28);
             lblConvertedHeightValue.TabIndex = 19;
-            lblConvertedHeightValue.Text = "No inputs yet";
+            lblConvertedHeightValue.Text = "No inputs yet.";
             // 
             // lblConvertedWeightValue
             // 
@@ -294,7 +315,7 @@
             lblConvertedWeightValue.Name = "lblConvertedWeightValue";
             lblConvertedWeightValue.Size = new Size(130, 28);
             lblConvertedWeightValue.TabIndex = 18;
-            lblConvertedWeightValue.Text = "No inputs yet";
+            lblConvertedWeightValue.Text = "No inputs yet.";
             // 
             // lblConvertedHeightCaption
             // 
@@ -467,6 +488,7 @@
         private Label lblConvertedWeightValue;
         private Label lblConvertedHeightValue;
         private Button btnConvert;
-        private ToolTip toolTip1;
+        private Label lblHeightHintBMI;
+        private Label lblHeightHintConverter;
     }
 }
