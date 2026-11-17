@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             btnQuitApp = new Button();
             tabApp = new TabControl();
             tabPgBMICalculator = new TabPage();
@@ -45,6 +46,9 @@
             lblWeightBMI = new Label();
             nudWeightBMI = new NumericUpDown();
             tabPgUnitConverter = new TabPage();
+            btnConvert = new Button();
+            lblConvertedHeightValue = new Label();
+            lblConvertedWeightValue = new Label();
             lblConvertedHeightCaption = new Label();
             lblConvertedWeightCaption = new Label();
             lblHeightUnitGuideConverter = new Label();
@@ -57,9 +61,7 @@
             nudWeightConverter = new NumericUpDown();
             lblAppInfo = new Label();
             lblAppHeading = new Label();
-            lblConvertedWeightValue = new Label();
-            lblConvertedHeightValue = new Label();
-            btnConvert = new Button();
+            toolTip1 = new ToolTip(components);
             tabApp.SuspendLayout();
             tabPgBMICalculator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudWeightBMI).BeginInit();
@@ -190,6 +192,7 @@
             txtHeightBMI.Size = new Size(150, 39);
             txtHeightBMI.TabIndex = 5;
             txtHeightBMI.TextAlign = HorizontalAlignment.Right;
+            toolTip1.SetToolTip(txtHeightBMI, "Format for Imperial: 5 8 or 5' 8\"; for Metric: 170");
             // 
             // lblHeightBMI
             // 
@@ -261,6 +264,37 @@
             tabPgUnitConverter.TabIndex = 1;
             tabPgUnitConverter.Text = "Unit Converter";
             tabPgUnitConverter.UseVisualStyleBackColor = true;
+            // 
+            // btnConvert
+            // 
+            btnConvert.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnConvert.Location = new Point(490, 554);
+            btnConvert.Name = "btnConvert";
+            btnConvert.Size = new Size(112, 45);
+            btnConvert.TabIndex = 20;
+            btnConvert.Text = "Convert";
+            btnConvert.UseVisualStyleBackColor = true;
+            btnConvert.Click += btnConvert_Click;
+            // 
+            // lblConvertedHeightValue
+            // 
+            lblConvertedHeightValue.AutoSize = true;
+            lblConvertedHeightValue.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblConvertedHeightValue.Location = new Point(771, 292);
+            lblConvertedHeightValue.Name = "lblConvertedHeightValue";
+            lblConvertedHeightValue.Size = new Size(130, 28);
+            lblConvertedHeightValue.TabIndex = 19;
+            lblConvertedHeightValue.Text = "No inputs yet";
+            // 
+            // lblConvertedWeightValue
+            // 
+            lblConvertedWeightValue.AutoSize = true;
+            lblConvertedWeightValue.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblConvertedWeightValue.Location = new Point(128, 292);
+            lblConvertedWeightValue.Name = "lblConvertedWeightValue";
+            lblConvertedWeightValue.Size = new Size(130, 28);
+            lblConvertedWeightValue.TabIndex = 18;
+            lblConvertedWeightValue.Text = "No inputs yet";
             // 
             // lblConvertedHeightCaption
             // 
@@ -375,37 +409,6 @@
             lblAppHeading.TabIndex = 3;
             lblAppHeading.Text = "PAGKALIWANGAN - ISCS 30.50 Final Project";
             // 
-            // lblConvertedWeightValue
-            // 
-            lblConvertedWeightValue.AutoSize = true;
-            lblConvertedWeightValue.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblConvertedWeightValue.Location = new Point(128, 292);
-            lblConvertedWeightValue.Name = "lblConvertedWeightValue";
-            lblConvertedWeightValue.Size = new Size(130, 28);
-            lblConvertedWeightValue.TabIndex = 18;
-            lblConvertedWeightValue.Text = "No inputs yet";
-            // 
-            // lblConvertedHeightValue
-            // 
-            lblConvertedHeightValue.AutoSize = true;
-            lblConvertedHeightValue.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            lblConvertedHeightValue.Location = new Point(771, 292);
-            lblConvertedHeightValue.Name = "lblConvertedHeightValue";
-            lblConvertedHeightValue.Size = new Size(130, 28);
-            lblConvertedHeightValue.TabIndex = 19;
-            lblConvertedHeightValue.Text = "No inputs yet";
-            // 
-            // btnConvert
-            // 
-            btnConvert.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnConvert.Location = new Point(490, 554);
-            btnConvert.Name = "btnConvert";
-            btnConvert.Size = new Size(112, 45);
-            btnConvert.TabIndex = 20;
-            btnConvert.Text = "Convert";
-            btnConvert.UseVisualStyleBackColor = true;
-            btnConvert.Click += btnConvert_Click;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
@@ -464,5 +467,6 @@
         private Label lblConvertedWeightValue;
         private Label lblConvertedHeightValue;
         private Button btnConvert;
+        private ToolTip toolTip1;
     }
 }

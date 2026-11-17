@@ -1,4 +1,5 @@
 using System.Xml.Linq;
+using System.Text.RegularExpressions;
 
 namespace Pagkaliwangan_FinalProject
 {
@@ -13,7 +14,15 @@ namespace Pagkaliwangan_FinalProject
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            // Set Default Units to Metric (i.e., cm and kg)
+            cboWeightUnitBMI.SelectedIndex = 0;
+            cboHeightUnitBMI.SelectedIndex = 0;
+
+            cboWeightUnitConverter.SelectedIndex = 0;
+            cboHeightUnitConverter.SelectedIndex = 0;
+
             CheckIfXMLExists();
+
         }
 
         private void CheckIfXMLExists()
@@ -22,7 +31,7 @@ namespace Pagkaliwangan_FinalProject
             {
                 XDocument newDoc = new XDocument(
                     new XDeclaration("1.0", "utf-8", "yes"),
-                    //Calcuulations as Root node
+                    //Calculations as Root node
                     //https://learn.microsoft.com/en-us/dotnet/api/system.xml.linq.xdocument?view=net-10.0
                     new XElement("Calculations")
                 );
@@ -53,7 +62,14 @@ namespace Pagkaliwangan_FinalProject
 
         private void btnCalculate_Click(object sender, EventArgs e)
         {
+            double weightInput = (double) nudWeightBMI.Value;
+            int selectedWeightUnit = cboWeightUnitBMI.SelectedIndex;
 
+            int selectedHeightUnit = cboHeightUnitBMI.SelectedIndex;
+            
+            {
+
+            }
         }
 
         private void btnConvert_Click(object sender, EventArgs e)
