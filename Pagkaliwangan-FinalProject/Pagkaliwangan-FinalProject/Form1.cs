@@ -50,5 +50,10 @@ namespace Pagkaliwangan_FinalProject
         {
             this.Close();
         }
+
+        private void btnCalculate_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
