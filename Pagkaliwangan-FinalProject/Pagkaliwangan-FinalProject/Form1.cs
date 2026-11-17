@@ -73,6 +73,11 @@ namespace Pagkaliwangan_FinalProject
 
             double BMI;
 
+            string heightElement;
+            string weightElement;
+
+            string BMICategory;
+
             // Handle Height first.
             // If height unit is cm or inches
             if (selectedHeightUnit == 0 || selectedHeightUnit == 1)
@@ -82,6 +87,15 @@ namespace Pagkaliwangan_FinalProject
                     MessageBox.Show("Please enter a valid numeric value.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtHeightBMI.Focus();
                     return;
+                }
+
+                if (selectedHeightUnit == 0)
+                {
+                    heightElement = $"{heightInput:F2} centimeters";
+                }
+                else
+                {
+                    heightElement = $"{heightInput:F2} inches";
                 }
 
                 heightToUse = heightInput;
@@ -113,6 +127,8 @@ namespace Pagkaliwangan_FinalProject
 
                 double totalInches = (feet * 12) + inches;
 
+                heightElement = $"{feet:F2} feet, {inches:F2} inches";
+
                 heightToUse = totalInches;
             }
             else
@@ -136,11 +152,13 @@ namespace Pagkaliwangan_FinalProject
             if (selectedWeightUnit == 0)
             {
                 weightToUse = weightInput;
+                weightElement = $"{weightInput} kilograms";
             }
             // If unit is lbs
             else if (selectedWeightUnit == 1)
             {
                 weightToUse = weightInput * 0.45359237;
+                weightElement = $"{weightInput} pounds";
             }
             else
             {
@@ -158,28 +176,70 @@ namespace Pagkaliwangan_FinalProject
             // Underweight
             if (BMI < 18.5)
             {
-                lblBMICategory.Text = $"With a BMI of {BMI: F2}, you are considered underweight.";
+                lblBMICategory.Text = $"With a BMI of {BMI:F2}, you are considered underweight.";
+                BMICategory = "Underweight";
             }
             // Healthy weight
             else if (18.5 <= BMI && BMI < 25)
             {
-                lblBMICategory.Text = $"With a BMI of {BMI: F2}, you are considered to have a healthy weight.";
+                lblBMICategory.Text = $"With a BMI of {BMI:F2}, you are considered to have a healthy weight.";
+                BMICategory = "Healthy Weight";
             }
             // Overweight
             else if (25 <= BMI && BMI < 30)
             {
-                lblBMICategory.Text = $"With a BMI of {BMI: F2}, you are considered overweight.";
+                lblBMICategory.Text = $"With a BMI of {BMI:F2}, you are considered overweight.";
+                BMICategory = "Overweight";
             }
             // Obese
             else if (30 <= BMI)
             {
-                lblBMICategory.Text = $"With a BMI of {BMI: F2}, you are considered obese";
+                lblBMICategory.Text = $"With a BMI of {BMI:F2}, you are considered obese";
+                BMICategory = "Obese";
             }
             // Default or Invalid
             else
             {
                 lblBMICategory.Text = $"Invalid BMI, or you do not fit the categories/cutoffs by WHO.";
+                return;
+            }            
+            
+            // Write Calculation to calculations.xml
+            CheckIfXMLExists();
+            XDocument doc = XDocument.Load(XMLFilePath);
+            int calculationID = 1;
+            var existingCalculations = doc.Root.Elements("Calculation").ToList();
+
+            if (existingCalculations.Count > 0)
+            {
+                int maxID = 0;
+                foreach (XElement element in existingCalculations)
+                {
+                    int currentID = (int) element.Attribute("Id");
+                    if (currentID > maxID)
+                    {
+                        maxID = currentID;
+                    }
+                }
+                calculationID = maxID + 1;
             }
+
+            // Inside Calculations Root Node
+            XElement calculationElement = new XElement("Calculation",
+                new XAttribute("Id", calculationID),
+                new XAttribute("Date", DateTime.Now.ToString("G"))
+            );
+
+            //Add Element inside Calculation node.
+            calculationElement.Add( new XElement("BMI_Category", BMICategory,
+                new XElement("BMI", BMI, 
+                    new XElement("Height", heightElement),
+                    new XElement("Weight", weightElement)
+                )));
+
+            doc.Root.Add( calculationElement );
+            doc.Save(XMLFilePath);
+
         }
 
         private void btnConvert_Click(object sender, EventArgs e)
