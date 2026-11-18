@@ -41,6 +41,8 @@ This project is based on the New York Time's (NYT) Wordle
 
 ### Image(s) of the Program(s)
 
-1. BMI Calculator
+1. Wordle-Type Game (Fil-Eng Wordle Clone)
+    - ![UI of Wordle Type Game Project](./Fil-Eng_WordleClone.png "UI of the Fil-Eng Wordle Clone")
+2. BMI Calculator
     - ![UI of Calculator Part of the Application](./BMI_CalculatorPart.png "UI of the Calculator part of the application")
     - ![UI of Converter Part of the Application](./BMI_ConverterPart.png "UI of the Converter part of the application")
