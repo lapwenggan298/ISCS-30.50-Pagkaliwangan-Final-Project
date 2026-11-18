@@ -7,11 +7,12 @@ namespace Pagkaliwangan_FinalProject
     {
         private readonly String XMLFilePath = Path.Combine(Application.StartupPath, "word_guess.xml");
 
-        public ArrayList randomWordsList = new ArrayList();
-        public ArrayList randomWordsUsed = new ArrayList();
-        public Random rand = new Random();
-        public string targetWord;
-        public int attemptsMade = 0;
+        private ArrayList randomWordsList = new ArrayList();
+        private ArrayList randomWordsUsed = new ArrayList();
+        private Random rand = new Random();
+        private string targetWord;
+        private int attemptsMade = 0;
+        
 
         public Form1()
         {
@@ -23,7 +24,7 @@ namespace Pagkaliwangan_FinalProject
             CheckIfXMLExists();
             GenerateRandomWords();
             targetWord = SelectWordToGuess();
-            txtGuessInput.Focus();
+            txtGuessInput_Focus(sender, e);
         }
 
         private void CheckIfXMLExists()
@@ -126,6 +127,11 @@ namespace Pagkaliwangan_FinalProject
             targetWord = SelectWordToGuess();
             attemptsMade = 0;
             lblHelperStatus.Text = "Type 5 letters and press or click ENTER";
+            txtGuessInput_Focus(sender, e);
+        }
+
+        private void txtGuessInput_Focus(object sender, EventArgs e)
+        {
             txtGuessInput.Focus();
         }
 
@@ -133,9 +139,9 @@ namespace Pagkaliwangan_FinalProject
         {
             string wordInput = txtGuessInput.Text;
             if (e.KeyCode == Keys.Back)
-            { 
+            {
             }
-            if (e.KeyCode == Keys.Enter) 
+            if (e.KeyCode == Keys.Enter)
             {
                 if (txtGuessInput.TextLength == 5)
                 {
@@ -154,7 +160,7 @@ namespace Pagkaliwangan_FinalProject
             if (wordInput.Length < 5)
             {
                 lblHelperStatus.Text = "Not Enough Letters";
-                txtGuessInput.Focus();
+                txtGuessInput_Focus(sender, e);
                 return;
             }
             EvaluateGuess(wordInput);
@@ -173,7 +179,7 @@ namespace Pagkaliwangan_FinalProject
                 // Check for exact letter matches (set to green)
                 for (int i = 0; i < 5; i++)
                 {
-                    if(guessWordChars[i] == targetWordChars[i])
+                    if (guessWordChars[i] == targetWordChars[i])
                     {
                         rowResult[i] = 'G';
                         targetWordChars[i] = '\0';
@@ -195,6 +201,20 @@ namespace Pagkaliwangan_FinalProject
                     }
                     // If not found in targetWord, set to X
                     if (!found) rowResult[i] = 'X';
+                }
+
+                // Colors
+                for (int i = 0; i < 5; i++)
+                {
+                    switch (rowResult[i])
+                    {
+                        case 'G':
+                            break;
+                        case 'Y':
+                            break;
+                        case 'X':
+                            break;
+                    }
                 }
 
                 // Check Win or Loss
