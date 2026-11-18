@@ -41,4 +41,5 @@ This project is based on the New York Time's (NYT) Wordle
 
 ### Image(s) of the Program(s)
 
-Images are *to follow*.
+1. Wordle-Type Game (Fil-Eng Wordle Clone)
+    - ![UI of Wordle Type Game Project](./Fil-Eng_WordleClone.png "UI of the Fil-Eng Wordle Clone")
