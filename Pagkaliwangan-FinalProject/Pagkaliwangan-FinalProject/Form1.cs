@@ -165,6 +165,8 @@ namespace Pagkaliwangan_FinalProject
         {
             if (attemptsMade >= 6) return;
 
+            if (txtGuessInput.ReadOnly == true) return;
+
             string wordInput = txtGuessInput.Text;
 
             if (e.KeyCode == Keys.Enter)
@@ -199,6 +201,8 @@ namespace Pagkaliwangan_FinalProject
 
         private void txtGuessInput_TextChanged(object sender, EventArgs e)
         {
+            if (attemptsMade >= 6) return;
+
             UpdateRowUI();
         }
 
@@ -275,6 +279,9 @@ namespace Pagkaliwangan_FinalProject
                 {
                     lblHelperStatus.Text = "You won! Game saved in word_guess.XML. Click the \"RESET/New Game\" to play again!";
                     txtGuessInput.ReadOnly = true;
+
+                    CheckIfXMLExists();
+                    // XML File Saving
                 }
                 else
                 {
@@ -285,14 +292,15 @@ namespace Pagkaliwangan_FinalProject
                     {
                         lblHelperStatus.Text = $"Game Over! The word was: {targetWord}. Click  the \"RESET/New Game\" to play again!";
                         txtGuessInput.ReadOnly = true;
+
+                        CheckIfXMLExists();
+                        // XML File Saving
                     }
                     else
                     {
                         UpdateRowUI();
                     }
                 }
-                CheckIfXMLExists();
-                // XML File Saving
             }
             else
             {
