@@ -130,7 +130,7 @@
             // txtGuessInput
             // 
             txtGuessInput.CharacterCasing = CharacterCasing.Upper;
-            txtGuessInput.Location = new Point(524, 664);
+            txtGuessInput.Location = new Point(538, 669);
             txtGuessInput.MaxLength = 5;
             txtGuessInput.Name = "txtGuessInput";
             txtGuessInput.Size = new Size(169, 31);

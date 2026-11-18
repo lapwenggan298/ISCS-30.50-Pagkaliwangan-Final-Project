@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Diagnostics.Eventing.Reader;
 using System.Xml.Linq;
 
 namespace Pagkaliwangan_FinalProject
@@ -28,6 +29,7 @@ namespace Pagkaliwangan_FinalProject
         public Form1()
         {
             InitializeComponent();
+            gridOfLabels = new Label[5, 5];
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -138,7 +140,19 @@ namespace Pagkaliwangan_FinalProject
         {
             targetWord = SelectWordToGuess();
             attemptsMade = 0;
+            txtGuessInput.Text = "";
+
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    gridOfLabels[i,j].BackColor = defaultColor;
+                    gridOfLabels[i,j].Text = "";
+                }
+            }
+
             lblHelperStatus.Text = "Type 5 letters and press or click ENTER";
+            txtGuessInput.ReadOnly = false;
             txtGuessInput_Focus(sender, e);
         }
 
@@ -161,7 +175,7 @@ namespace Pagkaliwangan_FinalProject
                 }
                 else
                 {
-                    lblHelperStatus.Text = "Not Enough Letters";
+                    lblHelperStatus.Text = $"Not Enough Letters! You only wrote down {txtGuessInput.TextLength} letter/s. You are missing {5 - txtGuessInput.TextLength} letter/s.";
                 }
             }
         }
@@ -171,7 +185,7 @@ namespace Pagkaliwangan_FinalProject
             string wordInput = txtGuessInput.Text;
             if (wordInput.Length < 5)
             {
-                lblHelperStatus.Text = "Not Enough Letters";
+                lblHelperStatus.Text = $"Not Enough Letters!  You only wrote down {txtGuessInput.TextLength} letter/s. You are missing {5 - txtGuessInput.TextLength} letter/s.";
                 txtGuessInput_Focus(sender, e);
                 return;
             }
@@ -185,8 +199,6 @@ namespace Pagkaliwangan_FinalProject
                 char[] targetWordChars = targetWord.ToCharArray();
                 char[] guessWordChars = guess.ToCharArray();
                 char[] rowResult = new char[5]; // For Row of squares to be set to G for green, Y/O for yellow/orange, X for gray
-
-                CheckIfXMLExists();
 
                 // Check for exact letter matches (set to green)
                 for (int i = 0; i < 5; i++)
@@ -206,25 +218,32 @@ namespace Pagkaliwangan_FinalProject
                     bool found = false;
                     for (int j = 0; j < 5; j++)
                     {
-                        rowResult[i] = 'Y';
-                        targetWordChars[i] = '\0';
-                        found = true;
-                        break;
+                        if (targetWordChars[j] == guessWordChars[i])
+                        {
+                            rowResult[i] = 'Y';
+                            targetWordChars[i] = '\0';
+                            found = true;
+                            break;
+                        }
                     }
                     // If not found in targetWord, set to X
                     if (!found) rowResult[i] = 'X';
                 }
 
                 // Colors
+                int currentRow = attemptsMade;
                 for (int i = 0; i < 5; i++)
                 {
                     switch (rowResult[i])
                     {
                         case 'G':
+                            gridOfLabels[currentRow, i].BackColor = colorGreen;
                             break;
                         case 'Y':
+                            gridOfLabels[currentRow, i].BackColor = colorYellow;
                             break;
                         case 'X':
+                            gridOfLabels[currentRow, i].BackColor = colorGray;
                             break;
                     }
                 }
@@ -233,6 +252,7 @@ namespace Pagkaliwangan_FinalProject
                 if (guess == targetWord)
                 {
                     lblHelperStatus.Text = "You won! Game saved in word_guess.XML. Click the \"RESET/New Game\" to play again!";
+                    txtGuessInput.ReadOnly = true;
                 }
                 else
                 {
@@ -242,14 +262,21 @@ namespace Pagkaliwangan_FinalProject
                     if (attemptsMade == 6)
                     {
                         lblHelperStatus.Text = $"Game Over! The word was: {targetWord}. Click  the \"RESET/New Game\" to play again!";
+                        txtGuessInput.ReadOnly = true;
                     }
                     else
                     {
-
+                        UpdateRowUI();
                     }
                 }
-
+                CheckIfXMLExists();
                 // XML File Saving
+            }
+            else
+            {
+                lblHelperStatus.Text = "You haven't written anything down!";
+                txtGuessInput.Focus();
+                return;
             }
         }
 
@@ -290,13 +317,21 @@ namespace Pagkaliwangan_FinalProject
             gridOfLabels[4, 4] = lblR5C5;
         }
 
-        // Update Rows UI
+        // Update Rows UI when being receiving input.
         private void UpdateRowUI()
         {
             int currentRow = attemptsMade;
+            string wordInput = txtGuessInput.Text;
             for (int column = 0; column < 5; column++)
             {
-
+                if (column < wordInput.Length) 
+                {
+                    gridOfLabels[currentRow, column].Text = wordInput[column].ToString();
+                }
+                else
+                {
+                    gridOfLabels[currentRow, column].Text = "";
+                }
             }
         }
     }
