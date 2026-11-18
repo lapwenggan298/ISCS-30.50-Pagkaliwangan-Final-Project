@@ -25,6 +25,9 @@ namespace Pagkaliwangan_FinalProject
         private readonly Color colorYellow = Color.Yellow;
         private readonly Color colorGray = Color.Gray;
         private readonly Color defaultColor = Color.Gainsboro;
+        
+        // Guesses made, to be put inside xml file after every game
+        private List<String> guessesMade = new List<string>();
 
         public Form1()
         {
@@ -142,6 +145,8 @@ namespace Pagkaliwangan_FinalProject
             attemptsMade = 0;
             txtGuessInput.Text = "";
 
+            guessesMade.Clear();
+
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 5; j++)
@@ -220,64 +225,85 @@ namespace Pagkaliwangan_FinalProject
 
         private void EvaluateGuess(String guess)
         {
-            if (!string.IsNullOrEmpty(guess))
+            if (string.IsNullOrEmpty(guess))
             {
-                char[] targetWordChars = targetWord.ToCharArray();
-                char[] guessWordChars = guess.ToCharArray();
-                char[] rowResult = new char[5]; // For Row of squares to be set to G for green, Y/O for yellow/orange, X for gray
+                lblHelperStatus.Text = "You haven't written anything down!";
+                txtGuessInput.Focus();
+                return;
+            }
 
-                // Check for exact letter matches (set to green)
-                for (int i = 0; i < 5; i++)
+            char[] targetWordChars = targetWord.ToCharArray();
+            char[] guessWordChars = guess.ToCharArray();
+            char[] rowResult = new char[5]; // For Row of squares to be set to G for green, Y/O for yellow/orange, X for gray
+
+            // Add guess to guesses made.
+            guessesMade.Add(guess);
+
+            // Check for exact letter matches (set to green)
+            for (int i = 0; i < 5; i++)
+            {
+                if (guessWordChars[i] == targetWordChars[i])
                 {
-                    if (guessWordChars[i] == targetWordChars[i])
+                    rowResult[i] = 'G';
+                    targetWordChars[i] = '\0';
+                }
+            }
+
+            // Check for misplaced letters (set to yellow or orange) and wrong letters (set to gray)
+            for (int i = 0; i < 5; i++)
+            {
+                if (rowResult[i] == 'G') continue;
+
+                bool found = false;
+                for (int j = 0; j < 5; j++)
+                {
+                    if (targetWordChars[j] == guessWordChars[i])
                     {
-                        rowResult[i] = 'G';
-                        targetWordChars[i] = '\0';
+                        rowResult[i] = 'Y';
+                        targetWordChars[j] = '\0';
+                        found = true;
+                        break;
                     }
                 }
+                // If not found in targetWord, set to X
+                if (!found) rowResult[i] = 'X';
+            }
 
-                // Check for misplaced letters (set to yellow or orange) and wrong letters (set to gray)
-                for (int i = 0; i < 5; i++)
+            // Colors
+            int currentRow = attemptsMade;
+            for (int i = 0; i < 5; i++)
+            {
+                switch (rowResult[i])
                 {
-                    if (rowResult[i] == 'G') continue;
-
-                    bool found = false;
-                    for (int j = 0; j < 5; j++)
-                    {
-                        if (targetWordChars[j] == guessWordChars[i])
-                        {
-                            rowResult[i] = 'Y';
-                            targetWordChars[j] = '\0';
-                            found = true;
-                            break;
-                        }
-                    }
-                    // If not found in targetWord, set to X
-                    if (!found) rowResult[i] = 'X';
+                    case 'G':
+                        gridOfLabels[currentRow, i].BackColor = colorGreen;
+                        break;
+                    case 'Y':
+                        gridOfLabels[currentRow, i].BackColor = colorYellow;
+                        break;
+                    case 'X':
+                        gridOfLabels[currentRow, i].BackColor = colorGray;
+                        break;
                 }
+            }
 
-                // Colors
-                int currentRow = attemptsMade;
-                for (int i = 0; i < 5; i++)
-                {
-                    switch (rowResult[i])
-                    {
-                        case 'G':
-                            gridOfLabels[currentRow, i].BackColor = colorGreen;
-                            break;
-                        case 'Y':
-                            gridOfLabels[currentRow, i].BackColor = colorYellow;
-                            break;
-                        case 'X':
-                            gridOfLabels[currentRow, i].BackColor = colorGray;
-                            break;
-                    }
-                }
+            // Check Win or Loss
+            if (guess == targetWord)
+            {
+                lblHelperStatus.Text = "You won! Game saved in word_guess.XML. Click the \"RESET/New Game\" to play again!";
+                txtGuessInput.ReadOnly = true;
 
-                // Check Win or Loss
-                if (guess == targetWord)
+                CheckIfXMLExists();
+                // XML File Saving
+            }
+            else
+            {
+                attemptsMade++;
+                txtGuessInput.Text = "";
+
+                if (attemptsMade == 6)
                 {
-                    lblHelperStatus.Text = "You won! Game saved in word_guess.XML. Click the \"RESET/New Game\" to play again!";
+                    lblHelperStatus.Text = $"Game Over! The word was: {targetWord}. Click  the \"RESET/New Game\" to play again!";
                     txtGuessInput.ReadOnly = true;
 
                     CheckIfXMLExists();
@@ -285,28 +311,8 @@ namespace Pagkaliwangan_FinalProject
                 }
                 else
                 {
-                    attemptsMade++;
-                    txtGuessInput.Text = "";
-
-                    if (attemptsMade == 6)
-                    {
-                        lblHelperStatus.Text = $"Game Over! The word was: {targetWord}. Click  the \"RESET/New Game\" to play again!";
-                        txtGuessInput.ReadOnly = true;
-
-                        CheckIfXMLExists();
-                        // XML File Saving
-                    }
-                    else
-                    {
-                        UpdateRowUI();
-                    }
+                    UpdateRowUI();
                 }
-            }
-            else
-            {
-                lblHelperStatus.Text = "You haven't written anything down!";
-                txtGuessInput.Focus();
-                return;
             }
         }
 
