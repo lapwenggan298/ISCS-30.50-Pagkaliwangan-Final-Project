@@ -247,7 +247,7 @@ namespace Pagkaliwangan_FinalProject
                         if (targetWordChars[j] == guessWordChars[i])
                         {
                             rowResult[i] = 'Y';
-                            targetWordChars[i] = '\0';
+                            targetWordChars[j] = '\0';
                             found = true;
                             break;
                         }
