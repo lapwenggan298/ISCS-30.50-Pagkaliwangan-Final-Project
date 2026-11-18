@@ -7,12 +7,12 @@ namespace Pagkaliwangan_FinalProject
     public partial class Form1 : Form
     {
         private readonly String XMLFilePath = Path.Combine(Application.StartupPath, "word_guess.xml");
-        
+
         // Word
         private ArrayList randomWordsList = new ArrayList();
         private ArrayList randomWordsUsed = new ArrayList();
         private string targetWord;
-        
+
         // Randomizer
         private Random rand = new Random();
 
@@ -29,7 +29,7 @@ namespace Pagkaliwangan_FinalProject
         public Form1()
         {
             InitializeComponent();
-            gridOfLabels = new Label[5, 5];
+            gridOfLabels = new Label[6, 5];
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -146,8 +146,8 @@ namespace Pagkaliwangan_FinalProject
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    gridOfLabels[i,j].BackColor = defaultColor;
-                    gridOfLabels[i,j].Text = "";
+                    gridOfLabels[i, j].BackColor = defaultColor;
+                    gridOfLabels[i, j].Text = "";
                 }
             }
 
@@ -163,12 +163,15 @@ namespace Pagkaliwangan_FinalProject
 
         private void txtGuessInput_KeyDown(object sender, KeyEventArgs e)
         {
+            if (attemptsMade >= 6) return;
+
             string wordInput = txtGuessInput.Text;
-            if (e.KeyCode == Keys.Back)
-            {
-            }
+
             if (e.KeyCode == Keys.Enter)
             {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+
                 if (txtGuessInput.TextLength == 5)
                 {
                     EvaluateGuess(wordInput);
@@ -178,6 +181,25 @@ namespace Pagkaliwangan_FinalProject
                     lblHelperStatus.Text = $"Not Enough Letters! You only wrote down {txtGuessInput.TextLength} letter/s. You are missing {5 - txtGuessInput.TextLength} letter/s.";
                 }
             }
+        }
+
+        private void txtGuessInput_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (attemptsMade >= 6)
+            {
+                e.Handled = true;
+                return;
+            }
+
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtGuessInput_TextChanged(object sender, EventArgs e)
+        {
+            UpdateRowUI();
         }
 
         private void btnEnter_Click(object sender, EventArgs e)
@@ -315,6 +337,13 @@ namespace Pagkaliwangan_FinalProject
             gridOfLabels[4, 2] = lblR5C3;
             gridOfLabels[4, 3] = lblR5C4;
             gridOfLabels[4, 4] = lblR5C5;
+
+            //Row 6
+            gridOfLabels[5, 0] = lblR6C1;
+            gridOfLabels[5, 1] = lblR6C2;
+            gridOfLabels[5, 2] = lblR6C3;
+            gridOfLabels[5, 3] = lblR6C4;
+            gridOfLabels[5, 4] = lblR6C5;
         }
 
         // Update Rows UI when being receiving input.
@@ -324,7 +353,7 @@ namespace Pagkaliwangan_FinalProject
             string wordInput = txtGuessInput.Text;
             for (int column = 0; column < 5; column++)
             {
-                if (column < wordInput.Length) 
+                if (column < wordInput.Length)
                 {
                     gridOfLabels[currentRow, column].Text = wordInput[column].ToString();
                 }

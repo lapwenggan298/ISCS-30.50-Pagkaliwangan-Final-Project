@@ -63,13 +63,18 @@
             lblR5C3 = new Label();
             lblR5C2 = new Label();
             lblR5C1 = new Label();
+            lblR6C5 = new Label();
+            lblR6C4 = new Label();
+            lblR6C3 = new Label();
+            lblR6C2 = new Label();
+            lblR6C1 = new Label();
             btnEnter = new Button();
             SuspendLayout();
             // 
             // btnEnter
             // 
             btnEnter.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnEnter.Location = new Point(756, 572);
+            btnEnter.Location = new Point(726, 635);
             btnEnter.Name = "btnEnter";
             btnEnter.Size = new Size(87, 34);
             btnEnter.TabIndex = 4;
@@ -130,19 +135,21 @@
             // txtGuessInput
             // 
             txtGuessInput.CharacterCasing = CharacterCasing.Upper;
-            txtGuessInput.Location = new Point(538, 669);
+            txtGuessInput.Location = new Point(536, 710);
             txtGuessInput.MaxLength = 5;
             txtGuessInput.Name = "txtGuessInput";
             txtGuessInput.Size = new Size(169, 31);
             txtGuessInput.TabIndex = 7;
             txtGuessInput.TextAlign = HorizontalAlignment.Center;
+            txtGuessInput.TextChanged += txtGuessInput_TextChanged;
             txtGuessInput.KeyDown += txtGuessInput_KeyDown;
+            txtGuessInput.KeyPress += txtGuessInput_KeyPress;
             // 
             // lblGuessCaption
             // 
             lblGuessCaption.AutoSize = true;
             lblGuessCaption.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblGuessCaption.Location = new Point(482, 627);
+            lblGuessCaption.Location = new Point(480, 668);
             lblGuessCaption.Name = "lblGuessCaption";
             lblGuessCaption.Size = new Size(73, 25);
             lblGuessCaption.TabIndex = 8;
@@ -569,11 +576,96 @@
             lblR5C1.TabIndex = 31;
             lblR5C1.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // lblR6C5
+            // 
+            lblR6C5.AutoSize = true;
+            lblR6C5.BackColor = Color.Gainsboro;
+            lblR6C5.BorderStyle = BorderStyle.FixedSingle;
+            lblR6C5.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            lblR6C5.ForeColor = Color.Black;
+            lblR6C5.Location = new Point(741, 547);
+            lblR6C5.MaximumSize = new Size(55, 55);
+            lblR6C5.MinimumSize = new Size(55, 55);
+            lblR6C5.Name = "lblR6C5";
+            lblR6C5.Padding = new Padding(5);
+            lblR6C5.Size = new Size(55, 55);
+            lblR6C5.TabIndex = 40;
+            lblR6C5.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lblR6C4
+            // 
+            lblR6C4.AutoSize = true;
+            lblR6C4.BackColor = Color.Gainsboro;
+            lblR6C4.BorderStyle = BorderStyle.FixedSingle;
+            lblR6C4.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            lblR6C4.ForeColor = Color.Black;
+            lblR6C4.Location = new Point(669, 547);
+            lblR6C4.MaximumSize = new Size(55, 55);
+            lblR6C4.MinimumSize = new Size(55, 55);
+            lblR6C4.Name = "lblR6C4";
+            lblR6C4.Padding = new Padding(5);
+            lblR6C4.Size = new Size(55, 55);
+            lblR6C4.TabIndex = 39;
+            lblR6C4.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lblR6C3
+            // 
+            lblR6C3.AutoSize = true;
+            lblR6C3.BackColor = Color.Gainsboro;
+            lblR6C3.BorderStyle = BorderStyle.FixedSingle;
+            lblR6C3.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            lblR6C3.ForeColor = Color.Black;
+            lblR6C3.Location = new Point(598, 547);
+            lblR6C3.MaximumSize = new Size(55, 55);
+            lblR6C3.MinimumSize = new Size(55, 55);
+            lblR6C3.Name = "lblR6C3";
+            lblR6C3.Padding = new Padding(5);
+            lblR6C3.Size = new Size(55, 55);
+            lblR6C3.TabIndex = 38;
+            lblR6C3.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lblR6C2
+            // 
+            lblR6C2.AutoSize = true;
+            lblR6C2.BackColor = Color.Gainsboro;
+            lblR6C2.BorderStyle = BorderStyle.FixedSingle;
+            lblR6C2.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            lblR6C2.ForeColor = Color.Black;
+            lblR6C2.Location = new Point(524, 547);
+            lblR6C2.MaximumSize = new Size(55, 55);
+            lblR6C2.MinimumSize = new Size(55, 55);
+            lblR6C2.Name = "lblR6C2";
+            lblR6C2.Padding = new Padding(5);
+            lblR6C2.Size = new Size(55, 55);
+            lblR6C2.TabIndex = 37;
+            lblR6C2.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lblR6C1
+            // 
+            lblR6C1.AutoSize = true;
+            lblR6C1.BackColor = Color.Gainsboro;
+            lblR6C1.BorderStyle = BorderStyle.FixedSingle;
+            lblR6C1.Font = new Font("Segoe UI", 20F, FontStyle.Bold);
+            lblR6C1.ForeColor = Color.Black;
+            lblR6C1.Location = new Point(451, 547);
+            lblR6C1.MaximumSize = new Size(55, 55);
+            lblR6C1.MinimumSize = new Size(55, 55);
+            lblR6C1.Name = "lblR6C1";
+            lblR6C1.Padding = new Padding(5);
+            lblR6C1.Size = new Size(55, 55);
+            lblR6C1.TabIndex = 36;
+            lblR6C1.TextAlign = ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1246, 926);
+            Controls.Add(lblR6C5);
+            Controls.Add(lblR6C4);
+            Controls.Add(lblR6C3);
+            Controls.Add(lblR6C2);
+            Controls.Add(lblR6C1);
             Controls.Add(lblR5C5);
             Controls.Add(lblR5C4);
             Controls.Add(lblR5C3);
@@ -655,6 +747,11 @@
         private Label lblR5C3;
         private Label lblR5C2;
         private Label lblR5C1;
+        private Label lblR6C5;
+        private Label lblR6C4;
+        private Label lblR6C3;
+        private Label lblR6C2;
+        private Label lblR6C1;
     }
 }
 
