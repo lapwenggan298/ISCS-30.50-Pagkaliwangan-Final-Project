@@ -41,4 +41,6 @@ This project is based on the New York Time's (NYT) Wordle
 
 ### Image(s) of the Program(s)
 
-Images are *to follow*.
+1. BMI Calculator
+    - ![UI of Calculator Part of the Application](./BMI_CalculatorPart.png "UI of the Calculator part of the application")
+    - ![UI of Converter Part of the Application](./BMI_ConverterPart.png "UI of the Converter part of the application")

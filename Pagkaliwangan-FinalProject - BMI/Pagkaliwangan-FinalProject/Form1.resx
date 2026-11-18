@@ -117,4 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="lblDisclaimer.Text" xml:space="preserve">
+    <value>IMPORTANT NOTE: What this calculator gives is not final, please consult a professional for your concerns.
+The BMI is based on WHO cutoff and for adults aged 20 up.
+Reference: https://www.who.int/data/gho/data/themes/topics/topic-details/GHO/body-mass-index</value>
+  </data>
 </root>
