@@ -221,6 +221,7 @@ namespace Pagkaliwangan_FinalProject
                 return;
             }
             EvaluateGuess(wordInput);
+            txtGuessInput_Focus(sender, e);
         }
 
         private void EvaluateGuess(String guess)
@@ -287,14 +288,18 @@ namespace Pagkaliwangan_FinalProject
                 }
             }
 
+            bool isWon;
+
             // Check Win or Loss
             if (guess == targetWord)
             {
                 lblHelperStatus.Text = "You won! Game saved in word_guess.XML. Click the \"RESET/New Game\" to play again!";
                 txtGuessInput.ReadOnly = true;
+                isWon = true;
 
                 CheckIfXMLExists();
                 // XML File Saving
+                SaveGameToXML(isWon);
             }
             else
             {
@@ -305,15 +310,64 @@ namespace Pagkaliwangan_FinalProject
                 {
                     lblHelperStatus.Text = $"Game Over! The word was: {targetWord}. Click  the \"RESET/New Game\" to play again!";
                     txtGuessInput.ReadOnly = true;
+                    isWon = false;
 
                     CheckIfXMLExists();
                     // XML File Saving
+                    SaveGameToXML(isWon);
                 }
                 else
                 {
                     UpdateRowUI();
                 }
             }
+        }
+
+        private void SaveGameToXML(bool isWon)
+        {
+            CheckIfXMLExists();
+            XDocument doc = XDocument.Load(XMLFilePath);
+
+            int nextGameID = 1;
+            var existingGames = doc.Root.Elements("Game").ToList();
+            if (existingGames.Count > 0)
+            {
+                int maxID = 0;
+                foreach(XElement element in existingGames)
+                {
+                    int currentID = (int)element.Attribute("Id");
+                    if  (currentID > maxID)
+                    {
+                        maxID = currentID;
+                    }
+                }
+                nextGameID = maxID + 1;
+            }
+
+            //Inside Games root node of XML
+            XElement gameElement = new XElement("Game",
+                new XAttribute("Id", nextGameID),
+                new XAttribute("Date", DateTime.Now.ToString("g"))
+            );
+
+            gameElement.Add(new XElement("TargetWord",targetWord), new XElement("Outcome", isWon ? "Won" : "Lost"));
+
+            XElement guessesElement = new XElement("Guesses",
+                new XAttribute("Total_Attempts", guessesMade.Count));
+
+            for (int i = 0; i < guessesMade.Count; i++)
+            {
+                guessesElement.Add(
+                    new XElement("Guess", 
+                        new XAttribute("Attempt", i + 1), 
+                            guessesMade[i])
+                );
+            }
+
+            gameElement.Add(guessesElement);
+
+            doc.Root.Add(gameElement);
+            doc.Save(XMLFilePath);
         }
 
         private void SetUpRowUI()
