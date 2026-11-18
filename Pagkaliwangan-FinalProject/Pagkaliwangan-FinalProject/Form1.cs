@@ -6,13 +6,24 @@ namespace Pagkaliwangan_FinalProject
     public partial class Form1 : Form
     {
         private readonly String XMLFilePath = Path.Combine(Application.StartupPath, "word_guess.xml");
-
+        
+        // Word
         private ArrayList randomWordsList = new ArrayList();
         private ArrayList randomWordsUsed = new ArrayList();
-        private Random rand = new Random();
         private string targetWord;
-        private int attemptsMade = 0;
         
+        // Randomizer
+        private Random rand = new Random();
+
+        // Attempts made or Current row
+        private int attemptsMade = 0;
+
+        // Label/Boxes UI
+        private Label[,] gridOfLabels;
+        private readonly Color colorGreen = Color.Green;
+        private readonly Color colorYellow = Color.Yellow;
+        private readonly Color colorGray = Color.Gray;
+        private readonly Color defaultColor = Color.Gainsboro;
 
         public Form1()
         {
@@ -22,6 +33,7 @@ namespace Pagkaliwangan_FinalProject
         private void Form1_Load(object sender, EventArgs e)
         {
             CheckIfXMLExists();
+            SetUpRowUI();
             GenerateRandomWords();
             targetWord = SelectWordToGuess();
             txtGuessInput_Focus(sender, e);
@@ -239,6 +251,43 @@ namespace Pagkaliwangan_FinalProject
 
                 // XML File Saving
             }
+        }
+
+        private void SetUpRowUI()
+        {   // Row 1
+            gridOfLabels[0, 0] = lblR1C1;
+            gridOfLabels[0, 1] = lblR1C2;
+            gridOfLabels[0, 2] = lblR1C3;
+            gridOfLabels[0, 3] = lblR1C4;
+            gridOfLabels[0, 4] = lblR1C5;
+
+            // Row 2
+            gridOfLabels[1, 0] = lblR2C1;
+            gridOfLabels[1, 1] = lblR2C2;
+            gridOfLabels[1, 2] = lblR2C3;
+            gridOfLabels[1, 3] = lblR2C4;
+            gridOfLabels[1, 4] = lblR2C5;
+
+            //Row 3
+            gridOfLabels[2, 0] = lblR3C1;
+            gridOfLabels[2, 1] = lblR3C2;
+            gridOfLabels[2, 2] = lblR3C3;
+            gridOfLabels[2, 3] = lblR3C4;
+            gridOfLabels[2, 4] = lblR3C5;
+
+            //Row 4
+            gridOfLabels[3, 0] = lblR4C1;
+            gridOfLabels[3, 1] = lblR4C2;
+            gridOfLabels[3, 2] = lblR4C3;
+            gridOfLabels[3, 3] = lblR4C4;
+            gridOfLabels[3, 4] = lblR4C5;
+
+            //Row 5
+            gridOfLabels[4, 0] = lblR5C1;
+            gridOfLabels[4, 1] = lblR5C2;
+            gridOfLabels[4, 2] = lblR5C3;
+            gridOfLabels[4, 3] = lblR5C4;
+            gridOfLabels[4, 4] = lblR5C5;
         }
 
         // Update Rows UI
