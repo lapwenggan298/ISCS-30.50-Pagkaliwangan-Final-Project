@@ -8,13 +8,9 @@ The proposals that were approved for this project are the Wordle-type game, and 
 
 ### What will be in the main branch (the one to be submitted)?
 
-I still have to decide between the two. Click [here](#details-about-the-projects) for more details regarding the project made. To be fair, I could just name the primary branch as the topic/idea I went with for the final project.
+I have decided to put both the BMI calculator and the Wordle game to be on the main branch. However, I submitted the Wordle game for my final project requirement. You may view the details regarding the projects under the [details about the project](#details-about-the-projects) section.
 
-### How about the non-main branch proposals?
-
-I will make either different branches or make different repositories for them, and will not be considered part of ISCS 30.50 - CM anymore.
-
-## Details About The Project(s)
+## Details About The Projects
 
 The projects will be utilizing XML for data storage such as the number of guesses made and the guesses themselves, and the BMI of a person given their weight and height.
 
